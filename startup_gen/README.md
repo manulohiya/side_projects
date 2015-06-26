@@ -1,4 +1,4 @@
 # Startup generator
 
 
-This web app randomly generates ideas for your next startup! 
+This web app randomly generates ideas on page refresh for your next startup! 

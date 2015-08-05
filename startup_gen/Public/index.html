@@ -9,17 +9,15 @@
 	<!-- Bootstrap CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
+    <!-- Autocomplete CDN -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.css">
+
     <!-- link to stylesheet (always require after Bootstrap) -->
     <link rel="stylesheet" type="text/css" href="style.css">
+
+
 	
-	<!-- link to jquery file -->
-	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-
-	<!-- underscore -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-
-	<!-- link to javascript file -->
-	<script src="scripts.js"></script> 
+	
 	
 	<title>Tinder for Startup Ideas</title>
 
@@ -56,16 +54,51 @@
 
     <div class="col-md-12" id = "voting">
 
-		<button id = "love" type="submit" class="btn btn-default btn-md col-md-6" data-id="55bea300f7875b8b3954b456">Love it!
+		<button id = "love" type="submit" class="btn btn-default btn-md col-md-6" data-id="55c030bc792c71104f3e5cd3">Love it!
                             </button>
                             
 
-		<button id = "hate" type="submit" class="btn btn-default btn-md col-md-6" data-id="55bea300f7875b8b3954b456" >
+		<button id = "hate" type="submit" class="btn btn-default btn-md col-md-6" data-id="55c030bc792c71104f3e5cd3" >
                             No way!</button>
 
-
+            <br>
+            <br>
       </div>                      
   </div> 
+
+<!-- Search form -->
+<div class="container">
+	<div class="row">
+        <div class="col-md-6">
+    		
+	                <form class='form-group' id='submit-search'>
+	                    <input type="text" class="form-control input-lg" placeholder="Search for company or market segment" />
+	                    <span class="input-group-btn">
+	                        <button id = "search" class="btn btn-info btn-lg" type="submit">
+	                            <i class="glyphicon glyphicon-search"></i>
+	                        </button>
+	                    </span>
+	                   </form>
+        </div>
+	</div>
+</div>
+
+<div id="results"></div>
+
+<script type="text/template" id="resultsTemplate">
+	
+       <div>   
+          <li> <%= company %>  for </li>
+          <li> <%= market %>   </li>
+          <li> <%= score %>   </li>
+            <br>
+            
+            
+           </div>
+
+
+
+</script>
 
 
 
@@ -77,6 +110,21 @@
 
 
 
+<!-- link to jquery file -->
+	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+
+	
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+
+	<!-- underscore -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
+
+
+	<!-- link to javascript file -->
+	<script src="scripts.js"></script> 
 
 
 </body>

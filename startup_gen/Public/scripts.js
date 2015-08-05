@@ -3,15 +3,21 @@ window.addEventListener('DOMContentLoaded', function(event) {
   console.log("DOM fully loaded and parsed");
 
   var timeout = 1000;
+  // results template
+  var _results = _.template($('#resultsTemplate').html());
+  var $results = $('#results');
+
 
 //Get random idea 
-var ready = function() {
+// var ready = function() {
 	console.log("Document is ready");
   var imagine = document.querySelector("#imagine");
   var butfor = document.querySelector("#butfor");
   var idea_company = document.querySelector("#company");
   var idea_market = document.querySelector("#market");
   var ideas = {};
+
+  
 
 
 
@@ -33,8 +39,9 @@ var ready = function() {
 
   });
 
-};
+// };
 
+//Love idea 
 $("#love").click(function(event) {
   console.log("Clicking LOVE")
   event.preventDefault();
@@ -52,44 +59,92 @@ $("#love").click(function(event) {
         success: function (data) {
 
         }
-       
+
       });
 
 
       $("#company").fadeOut(timeout, function(){});
       $("#market").fadeOut(timeout, function(){
-        ready();
+        location.reload();
       });
     });
 
+//Hate idea 
 $("#hate").click(function(event) {
   console.log("Clicking Hate")
   event.preventDefault();
   ideaId = $(this).attr('data-id')
   
     // send PUT request to server to update Love counter
-      $.ajax({
-        type: 'PUT',
-        url: '/api/ideas/' + ideaId+'/hates',
-        data: ideaId,
-        success: function (data) {
-
-        
-        }
-      });
+    $.ajax({
+      type: 'PUT',
+      url: '/api/ideas/' + ideaId+'/hates',
+      data: ideaId,
+      success: function (data) {
 
 
-  $("#company").fadeOut(timeout, function(){});
-  $("#market").fadeOut(timeout, function(){
-    ready();
+      }
+    });
+
+
+    $("#company").fadeOut(timeout, function(){});
+    $("#market").fadeOut(timeout, function(){
+      location.reload();
+    });
   });
+
+
+//Submit search
+$("#submit-search").submit(function(event){
+ console.log("Submitting search");
+ event.preventDefault(); 
+ $results.empty();
+ $("#submit-search").focus();
+
+ var query = $(".form-control").val();
+ console.log("query ="+query);
+
+ $.get('/api/ideas/search/'+query, function(data){
+  ideas = data
+
+
+
+  _.each(ideas, function(idea) {
+   // console.log(idea);
+   ideaData = {company: idea.company, market: idea.market, score: idea.score};
+   console.log(ideaData);
+   var $result = $(_results(ideaData))
+   $results.append($result);
+
+ });
+
+
 });
 
 
+});
 
 
+//Autocomplete
 
 
+       $('.form-control').on('keyup', function(){
+           event.preventDefault();
+          query =  $('.form-control').val();
+          console.log(query);
+           $.get('/api/ideas/search/'+query+'/autocomplete', function(data) {
+              console.log(data);
+            $(".form-control").autocomplete({
+              source: data
+
+            });
+    
+    
+     
+    
+           }); 
+
+      });
 
 
 });

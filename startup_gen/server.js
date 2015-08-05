@@ -4,9 +4,21 @@ var express = require('express'),
     _ = require('underscore'),
     cors = require('cors'),
     mongoose = require('mongoose'),
-    db = require('./models')
-    bodyParser = require('body-parser');
+    db = require('./models'),
+  	s = require("underscore.string"),
+    bodyParser = require('body-parser'),
+    maxLimit = 10;
 
+String.prototype.capitalize = function(){
+    var stringArr = this.toLowerCase().split(' ');
+    function capital(match) {
+    	return match.toUpperCase();
+    }
+    for (i=0;i<stringArr.length; i++) {
+    	stringArr[i] = stringArr[i].replace(/^\w/, capital);
+    }
+    return stringArr.join(' ');
+};
 
 // Connect to database
 mongoose.connect(process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/startupninja');
@@ -110,6 +122,7 @@ app.put('/api/ideas/:id/loves', function (req, res) {
   db.Idea.findOne({_id: targetId}, function (err, foundIdea) {
     // update the idea's love counter
     foundIdea.loves += 1;
+    foundIdea.score += 1;
     
     // save updated idea in db
     foundIdea.save(); 
@@ -125,14 +138,97 @@ app.put('/api/ideas/:id/hates', function (req, res) {
   db.Idea.findOne({_id: targetId}, function (err, foundIdea) {
     // update the idea's love counter
     foundIdea.hates += 1;
+    foundIdea.score -= 1;
     
     // save updated idea in db
     foundIdea.save(); 
   });
 });
 
+// Top X  query 
+
+ app.get('/api/ideas/search/top', function (req, res) {
+  console.log("Gettin high")
+
+ db.Idea.find().sort({score: -1}).limit(maxLimit).exec(function(err, ideas){
+    console.log("Ideas: "+ideas);
+    res.json(ideas);
+  });
+
+  
+
+});
+
+// Custom Search by company or market name
+app.get('/api/ideas/search/:query', function (req, res) {
 
 
+	var query = req.params.query;
+	
+	console.log(query);
+	// var regexVal = '/^' + query + '/i';
+	var regexVal = new RegExp("^.*"+query+".*","gi");
+	console.log(regexVal);
+
+// Find all ideas that match either market or company
+	db.Idea.find({"$or" : [{"market":{ $regex: regexVal }}, {"company":{ $regex: regexVal }}]}).sort({score: -1}).limit(maxLimit).exec(function(err, ideas) {
+		res.json(ideas);
+	});	
+	
+});
+
+
+// Autocomplete
+app.get('/api/ideas/search/:query/autocomplete', function (req, res) {
+
+var query = req.params.query;
+  console.log(query);
+  // var regexVal = '/^' + query + '/i';
+  var regexVal = new RegExp("^.*"+query+".*","gi");
+
+// Find all ideas that match company
+  db.Idea.find({"company":{ $regex: regexVal }}).sort({score: -1}).limit(maxLimit).exec(function(err, ideas) {
+    var i = 0;
+    var autoComplete1 = [];
+    console.log(ideas.length);
+    while (i < ideas.length) {
+      
+      autoComplete1[i] = ideas[i].company
+      i++;
+    }; 
+
+    //Get unique values
+  var autoComplete1 = autoComplete1.filter(function(item, i, ar)
+    { return ar.indexOf(item) === i; 
+      });
+
+// Find all ideas that match market
+  db.Idea.find({"market":{ $regex: regexVal }}).sort({score: -1}).limit(maxLimit).exec(function(err, ideas) {
+    var i = 0;
+    var autoComplete2 = [];
+    console.log(ideas.length);
+    while (i < ideas.length) {
+      
+      autoComplete2[i] = ideas[i].market
+      i++;
+    }; 
+
+       //Get unique values
+  var autoComplete2 = autoComplete2.filter(function(item, i, ar)
+    { return ar.indexOf(item) === i; 
+      });
+
+  var autoComplete = autoComplete1.concat(autoComplete2);  
+  console.log(autoComplete);
+  
+  console.log(autoComplete)
+  res.json(autoComplete);
+    
+  }); 
+
+});
+
+});
 
 
 // listen on port 3000

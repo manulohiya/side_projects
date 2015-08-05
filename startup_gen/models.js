@@ -6,7 +6,8 @@ var ideaSchema = new Schema({
   company: String,
   market: String,
   loves: Number,
-  hates: Number
+  hates: Number,
+  score: Number
    });
 
 var Idea = mongoose.model('Idea', ideaSchema);

@@ -39,7 +39,23 @@ window.addEventListener('DOMContentLoaded', function(event) {
 
   });
 
-// };
+
+//Top 20
+ $.get('/api/ideas/search/top', function(data){
+  ideas = data
+  console.log(ideas)
+
+
+  _.each(ideas, function(idea) {
+   // console.log(idea);
+   ideaData = {company: idea.company, market: idea.market, score: idea.score};
+   console.log(ideaData);
+   var $result = $(_results(ideaData))
+   $results.append($result);
+
+  });
+
+});
 
 //Love idea 
 $("#love").click(function(event) {
@@ -94,6 +110,12 @@ $("#hate").click(function(event) {
   });
 
 
+
+
+
+
+
+
 //Submit search
 $("#submit-search").submit(function(event){
  console.log("Submitting search");
@@ -103,11 +125,10 @@ $("#submit-search").submit(function(event){
 
  var query = $(".form-control").val();
  console.log("query ="+query);
-
+ 
  $.get('/api/ideas/search/'+query, function(data){
   ideas = data
-
-
+  });
 
   _.each(ideas, function(idea) {
    // console.log(idea);
@@ -122,13 +143,13 @@ $("#submit-search").submit(function(event){
 });
 
 
-});
+
 
 
 //Autocomplete
 
 
-       $('.form-control').on('keyup', function(){
+       $('#autocomplete').on('keyup', function(){
            event.preventDefault();
           query =  $('.form-control').val();
           console.log(query);
@@ -147,5 +168,37 @@ $("#submit-search").submit(function(event){
       });
 
 
+
+
+
+
+
+//Logic to submit idea
+$('#submitidea').click(function(e){
+ 
+ e.preventDefault();
+ console.log("im submitting an idea")
+ var idea = {
+   company: $('#submitcompany').val(),
+   market: $('#submitmarket').val(),
+   }
+   
+ 
+
+ console.log(idea);
+ $.post('/api/ideas', idea, function(data) {
+   console.log('posted idea!');
+          
+          
+ //        });
+
+  });
+
+
+    location.reload(); 
 });
+
+
+});
+
 

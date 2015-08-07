@@ -1,66 +1,153 @@
-h1 {
-	text-align: center;
-	vertical-align: middle;
-	font-family: helvetica;
-	color: white;
-	font-size: 100px;
-}
-
-.btn {
-
-	text-align: center;
-	margin-left: 15px;
-	width: 200px;
-
-}
-
-#love {
-	background-color: green
-}
-
-#hate {
-	background-color: red
-}
-
-#voting {
-	vertical-align: middle;
+#playscreen {
+    width: 100%;
 }
 
 
-body {
-    background-color: black;
+
+@media (min-width: 992px) { 
+    h1 {
+    
+	   font-size: 80px;
+        margin-top: 200px!important;
+        }
+
+    #left {
+    
+    background-color: rgb(218, 85, 47);
+     /*background-color: black;*/
+    height: 600px;
+    text-align: center;
+    color: white;
+
+
+    }
+
+    #for {
+    
+    background-color: white;
+    /*height: 600px;*/
+    text-align: center;
+    
+    color: black;
+
+    display: table;
+    margin: 0 auto;
+    
+    }
+
+
+
+    #right {
+ 
+    background-color: #2982C9;
+    /*background-color: black;*/
+    height: 600px;
+    text-align: center;
+    color: white;
+   
+    }    
+
 }
 
-#market {
-	color: red;
+@media (max-width: 992px) { 
+    h1 {
+    
+       font-size: 40px;
+        margin-top: 0px!important;
+        padding: 0;
+    }
 
+    #left {
+    
+    background-color: rgb(218, 85, 47);
+     /*background-color: black;*/
+    height: 200px;
+    text-align: center;
+    color: white;
+
+
+    }
+
+    #for {
+    
+    background-color: white;
+    height: 50px;
+    text-align: center;
+    
+    color: black;
+
+    display: table;
+    margin: 0 auto;
+
+    }
+
+
+
+    #right {
+ 
+    background-color: #2982C9;
+    /*background-color: black;*/
+    height: 200px;
+    text-align: center;
+    color: white;
+   
+    }       
+
+   
 }
 
-#company {
-	color: red;
+
+
+
+
+
+
+h2 {
+    text-align: center;
 }
 
-#imagine {
-	margin-top: 100px;
+li {
+    list-style-type: none;
 }
 
 
 /*Search form*/
 
-#custom-search-input{
+#searchscreen{
+    width: 100%;
+    background-color: rgb(204, 33, 39);
+    color: white;
+    /*max-height: 600px;*/
+
+}
+
+#submit-search{
+    text-align: left;
+}
+
+#autocomplete{
     padding: 3px;
     border: solid 1px #E4E4E4;
     border-radius: 6px;
     background-color: #fff;
+    
+    max-width: 100%;
+    display: table;
+   margin: 0 auto;
+   margin-top: 20px;
+    
 }
 
-#custom-search-input input{
+/*.form-control{
+    
     border: 0;
     box-shadow: none;
+    margin-left: 15px;
 }
-
-#custom-search-input button{
-    margin: 2px 0 0 0;
+*/
+#autocomplete-input button{
+    display: table;
+    margin: 0 auto;
     background: none;
     box-shadow: none;
     border: 0;
@@ -69,17 +156,130 @@ body {
     border-left: solid 1px #ccc;
 }
 
-#custom-search-input button:hover{
+#search-input button:hover{
     border: 0;
     box-shadow: none;
     border-left: solid 1px #ccc;
 }
 
-#custom-search-input .glyphicon-search{
+#search-input .glyphicon-search{
     font-size: 23px;
+    margin-top: 20px;
 }
 
-li {
-    color: red;
+#results {
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 24px;
+    margin-bottom: 20px;
 }
+
+
+#submitscreen {
+    background-color: rgb(63, 114, 155);
+    width: 100%;
+    color: white;
+}
+
+#submitidea {
+    
+   display: table;
+   margin: 0 auto
+
+
+}
+
+
+
+/*Buttons*/
+
+.btn{
+    
+    box-shadow: 1px 1px 5px #888888;
+    text-align: center;
+    margin-left: 0px;
+
+     display: table;
+   margin: 0 auto;
+   margin-top: 20px;
+   
+}
+
+.btn-xs{
+    font-weight: 300;
+}
+   
+.btn-hot {
+color: #fff;
+background-color: #db5566;
+border-bottom:2px solid #af4451;
+}
+
+.btn-hot:hover, .btn-sky.active:focus, .btn-hot:focus, .open>.dropdown-toggle.btn-hot {
+color: #fff;
+background-color: #df6a78;
+border-bottom:2px solid #b25560;
+outline: none;}
+
+
+.btn-hot:active, .btn-hot.active {
+color: #fff;
+background-color: #c04b59;
+border-top:2px solid #9a3c47;
+margin-top: 2px;
+}
+
+.btn-fresh {
+color: #fff;
+background-color: #51bf87;
+border-bottom:2px solid #41996c;
+}
+
+.btn-fresh:hover, .btn-sky.active:focus, .btn-fresh:focus, .open>.dropdown-toggle.btn-fresh {
+color: #fff;
+background-color: #66c796;
+border-bottom:2px solid #529f78;
+outline: none;
+}
+
+
+.btn-fresh:active, .btn-fresh.active {
+color: #fff;
+background-color: #47a877;
+border-top:2px solid #39865f;
+outline: none;
+outline-offset: none;
+margin-top: 2px;
+}
+
+
+.btn-sky {
+color: #fff;
+background-color: #0bacd3;
+border-bottom:2px solid #098aa9;
+
+}
+
+.btn-sky:hover,.btn-sky.active:focus, .btn-sky:focus, .open>.dropdown-toggle.btn-sky {
+color: #fff;
+background-color: #29b6d8;
+border-bottom:2px solid #2192ad;
+outline: none;
+}
+
+.btn-sky:active, .btn-sky.active {
+color: #fff;
+background-color: #0a97b9;
+border-top:2px solid #087994;
+outline-offset: none;
+margin-top: 2px;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus {
+    outline: none;
+    outline-offset: 0px;
+}
+
 

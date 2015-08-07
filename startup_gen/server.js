@@ -1,23 +1,23 @@
 // require express framework and additional modules
 var express = require('express'),
-    app = express(),
-    _ = require('underscore'),
-    cors = require('cors'),
-    mongoose = require('mongoose'),
-    db = require('./models'),
-  	s = require("underscore.string"),
-    bodyParser = require('body-parser'),
-    maxLimit = 10;
+app = express(),
+_ = require('underscore'),
+cors = require('cors'),
+mongoose = require('mongoose'),
+db = require('./models'),
+s = require("underscore.string"),
+bodyParser = require('body-parser'),
+maxLimit = 20;
 
 String.prototype.capitalize = function(){
-    var stringArr = this.toLowerCase().split(' ');
-    function capital(match) {
-    	return match.toUpperCase();
-    }
-    for (i=0;i<stringArr.length; i++) {
-    	stringArr[i] = stringArr[i].replace(/^\w/, capital);
-    }
-    return stringArr.join(' ');
+  var stringArr = this.toLowerCase().split(' ');
+  function capital(match) {
+   return match.toUpperCase();
+ }
+ for (i=0;i<stringArr.length; i++) {
+   stringArr[i] = stringArr[i].replace(/^\w/, capital);
+ }
+ return stringArr.join(' ');
 };
 
 // Connect to database
@@ -39,7 +39,7 @@ app.use(express.static(__dirname + '/public'));
 //   {id: 1, company: "Tinder", market: "organic farming"},
 //   {id: 2, company: 'Uber', market: "dogs"},
 //   {id: 3, company: 'Airbnb', market: "hackers"}
-  
+
 // ];
 
 
@@ -83,20 +83,20 @@ app.get('/', function (req, res) {
 // generate all ideas and send to client
 app.get('/api/ideas', function (req, res) {
  db.Idea.find(function(err, ideas){
-    console.log("Ideas: "+ideas);
-    res.json(ideas);
-  });
+  console.log("Ideas: "+ideas);
+  res.json(ideas);
+});
 });
 
 // generate random idea and send to client
 app.get('/api/ideas/random', function (req, res) {
   // send all phrases as JSON response
  // randomIdea = shuffle(ideas);
-  db.Idea.find(function(err,ideas){
-  	randomIdea = shuffle(ideas);
-  	console.log(randomIdea)
-  	res.json(randomIdea);
-  });
+ db.Idea.find(function(err,ideas){
+   randomIdea = shuffle(ideas);
+   console.log(randomIdea)
+   res.json(randomIdea);
+ });
 });
 
 // get one specfic idea
@@ -107,8 +107,8 @@ app.get('/api/ideas/:id', function (req, res) {
   // find phrase in db by id
   db.Idea.findOne({_id: targetId}, function (err, foundIdea) {
     res.json(foundIdea);
-  
-});
+
+  });
 
 });
 
@@ -121,8 +121,8 @@ app.put('/api/ideas/:id/loves', function (req, res) {
   // find idea in db by id
   db.Idea.findOne({_id: targetId}, function (err, foundIdea) {
     // update the idea's love counter
-    foundIdea.loves += 1;
-    foundIdea.score += 1;
+    foundIdea.loves += 5;
+    foundIdea.score += 5;
     
     // save updated idea in db
     foundIdea.save(); 
@@ -137,8 +137,8 @@ app.put('/api/ideas/:id/hates', function (req, res) {
   // find idea in db by id
   db.Idea.findOne({_id: targetId}, function (err, foundIdea) {
     // update the idea's love counter
-    foundIdea.hates += 1;
-    foundIdea.score -= 1;
+    foundIdea.hates += 3;
+    foundIdea.score -= 3;
     
     // save updated idea in db
     foundIdea.save(); 
@@ -147,10 +147,10 @@ app.put('/api/ideas/:id/hates', function (req, res) {
 
 // Top X  query 
 
- app.get('/api/ideas/search/top', function (req, res) {
+app.get('/api/ideas/search/top', function (req, res) {
   console.log("Gettin high")
 
- db.Idea.find().sort({score: -1}).limit(maxLimit).exec(function(err, ideas){
+  db.Idea.find().sort({score: -1}).limit(maxLimit).exec(function(err, ideas){
     console.log("Ideas: "+ideas);
     res.json(ideas);
   });
@@ -171,63 +171,80 @@ app.get('/api/ideas/search/:query', function (req, res) {
 	console.log(regexVal);
 
 // Find all ideas that match either market or company
-	db.Idea.find({"$or" : [{"market":{ $regex: regexVal }}, {"company":{ $regex: regexVal }}]}).sort({score: -1}).limit(maxLimit).exec(function(err, ideas) {
-		res.json(ideas);
-	});	
-	
+db.Idea.find({"$or" : [{"market":{ $regex: regexVal }}, {"company":{ $regex: regexVal }}]}).sort({score: -1}).limit(maxLimit).exec(function(err, ideas) {
+  res.json(ideas);
+});	
+
 });
 
 
 // Autocomplete
 app.get('/api/ideas/search/:query/autocomplete', function (req, res) {
 
-var query = req.params.query;
+  var query = req.params.query;
   console.log(query);
   // var regexVal = '/^' + query + '/i';
   var regexVal = new RegExp("^.*"+query+".*","gi");
 
 // Find all ideas that match company
-  db.Idea.find({"company":{ $regex: regexVal }}).sort({score: -1}).limit(maxLimit).exec(function(err, ideas) {
-    var i = 0;
-    var autoComplete1 = [];
-    console.log(ideas.length);
-    while (i < ideas.length) {
-      
-      autoComplete1[i] = ideas[i].company
-      i++;
-    }; 
+db.Idea.find({"company":{ $regex: regexVal }}).sort({score: -1}).limit(maxLimit).exec(function(err, ideas) {
+  var i = 0;
+  var autoComplete1 = [];
+  console.log(ideas.length);
+  while (i < ideas.length) {
+
+    autoComplete1[i] = ideas[i].company
+    i++;
+  }; 
 
     //Get unique values
-  var autoComplete1 = autoComplete1.filter(function(item, i, ar)
-    { return ar.indexOf(item) === i; 
+    var autoComplete1 = autoComplete1.filter(function(item, i, ar)
+      { return ar.indexOf(item) === i; 
       });
 
 // Find all ideas that match market
-  db.Idea.find({"market":{ $regex: regexVal }}).sort({score: -1}).limit(maxLimit).exec(function(err, ideas) {
-    var i = 0;
-    var autoComplete2 = [];
-    console.log(ideas.length);
-    while (i < ideas.length) {
-      
-      autoComplete2[i] = ideas[i].market
-      i++;
-    }; 
+db.Idea.find({"market":{ $regex: regexVal }}).sort({score: -1}).limit(maxLimit).exec(function(err, ideas) {
+  var i = 0;
+  var autoComplete2 = [];
+  console.log(ideas.length);
+  while (i < ideas.length) {
+
+    autoComplete2[i] = ideas[i].market
+    i++;
+  }; 
 
        //Get unique values
-  var autoComplete2 = autoComplete2.filter(function(item, i, ar)
-    { return ar.indexOf(item) === i; 
-      });
+       var autoComplete2 = autoComplete2.filter(function(item, i, ar)
+        { return ar.indexOf(item) === i; 
+        });
 
-  var autoComplete = autoComplete1.concat(autoComplete2);  
-  console.log(autoComplete);
-  
-  console.log(autoComplete)
-  res.json(autoComplete);
-    
-  }); 
+       var autoComplete = autoComplete1.concat(autoComplete2);  
+       console.log(autoComplete);
+
+       console.log(autoComplete)
+       res.json(autoComplete);
+
+     }); 
 
 });
 
+});
+
+
+// IDEAS#CREATE
+app.post('/api/ideas', function(req, res) {
+  // SAVE LINE TO DB
+  var idea = new db.Idea({
+    company: req.body.company,
+    market: req.body.market,
+    loves: 0,
+    hates: 0,
+    score: 0
+  });
+  console.log(idea);
+  idea.save(function(err,idea){ 
+    res.json(idea);
+  });
 });
 
 

@@ -40,15 +40,16 @@ window.addEventListener('DOMContentLoaded', function(event) {
   });
 
 
-//Top 20
+//Top X
  $.get('/api/ideas/search/top', function(data){
   ideas = data
   console.log(ideas)
-
+  var counter = 0;
 
   _.each(ideas, function(idea) {
    // console.log(idea);
-   ideaData = {company: idea.company, market: idea.market, score: idea.score};
+   counter ++;
+   ideaData = {company: idea.company, market: idea.market, score: idea.score, counter};
    console.log(ideaData);
    var $result = $(_results(ideaData))
    $results.append($result);
@@ -117,24 +118,27 @@ $("#hate").click(function(event) {
 
 
 //Submit search
-$("#submit-search").submit(function(event){
- console.log("Submitting search");
+$("#submit-search").click(function(event){
+ // console.log("Submitting search");
+ 
  event.preventDefault(); 
- $results.empty();
- $("#submit-search").focus();
+ 
+  // $("#submit-search").focus();
 
  var query = $(".form-control").val();
- console.log("query ="+query);
+ // console.log("query ="+query);
  
  $.get('/api/ideas/search/'+query, function(data){
   ideas = data
   });
-
+ $results.empty();
   _.each(ideas, function(idea) {
    // console.log(idea);
    ideaData = {company: idea.company, market: idea.market, score: idea.score};
-   console.log(ideaData);
+   // console.log(ideaData);
+    
    var $result = $(_results(ideaData))
+   console.log("Reached here");
    $results.append($result);
 
  });
@@ -146,16 +150,16 @@ $("#submit-search").submit(function(event){
 
 
 
-//Autocomplete
+//Autocomplete company
 
 
-       $('#autocomplete').on('keyup', function(){
+       $('#submitcompany').on('keyup', function(){
            event.preventDefault();
-          query =  $('.form-control').val();
-          console.log(query);
-           $.get('/api/ideas/search/'+query+'/autocomplete', function(data) {
-              console.log(data);
-            $(".form-control").autocomplete({
+          query =  $('#submitcompany').val();
+          // console.log(query);
+           $.get('/api/ideas/search/'+query+'/autocomplete/company', function(data) {
+              // console.log(data);
+            $("#submitcompany").autocomplete({
               source: data
 
             });
@@ -168,6 +172,26 @@ $("#submit-search").submit(function(event){
       });
 
 
+//Autocomplete market
+
+
+       $('#submitmarket').on('keyup', function(){
+           event.preventDefault();
+          query =  $('#submitmarket').val();
+           console.log(query);
+           $.get('/api/ideas/search/'+query+'/autocomplete/market', function(data) {
+              // console.log(data);
+            $("#submitmarket").autocomplete({
+              source: data
+
+            });
+    
+    
+     
+    
+           }); 
+
+      });
 
 
 

@@ -7,7 +7,7 @@ mongoose = require('mongoose'),
 db = require('./models'),
 s = require("underscore.string"),
 bodyParser = require('body-parser'),
-maxLimit = 20;
+maxLimit = 10;
 
 String.prototype.capitalize = function(){
   var stringArr = this.toLowerCase().split(' ');
@@ -178,8 +178,8 @@ db.Idea.find({"$or" : [{"market":{ $regex: regexVal }}, {"company":{ $regex: reg
 });
 
 
-// Autocomplete
-app.get('/api/ideas/search/:query/autocomplete', function (req, res) {
+// Autocomplete company
+app.get('/api/ideas/search/:query/autocomplete/company', function (req, res) {
 
   var query = req.params.query;
   console.log(query);
@@ -202,6 +202,21 @@ db.Idea.find({"company":{ $regex: regexVal }}).sort({score: -1}).limit(maxLimit)
       { return ar.indexOf(item) === i; 
       });
 
+    console.log(autoComplete1)
+       res.json(autoComplete1);
+
+     });
+
+});
+
+// Autocomplete company
+app.get('/api/ideas/search/:query/autocomplete/market', function (req, res) {
+
+ var query = req.params.query;
+  console.log(query);
+  // var regexVal = '/^' + query + '/i';
+  var regexVal = new RegExp("^.*"+query+".*","gi");
+
 // Find all ideas that match market
 db.Idea.find({"market":{ $regex: regexVal }}).sort({score: -1}).limit(maxLimit).exec(function(err, ideas) {
   var i = 0;
@@ -218,17 +233,16 @@ db.Idea.find({"market":{ $regex: regexVal }}).sort({score: -1}).limit(maxLimit).
         { return ar.indexOf(item) === i; 
         });
 
-       var autoComplete = autoComplete1.concat(autoComplete2);  
-       console.log(autoComplete);
+       // var autoComplete = autoComplete1.concat(autoComplete2);  
+       // console.log(autoComplete);
 
-       console.log(autoComplete)
-       res.json(autoComplete);
+       console.log(autoComplete2)
+       res.json(autoComplete2);
 
      }); 
 
 });
 
-});
 
 
 // IDEAS#CREATE

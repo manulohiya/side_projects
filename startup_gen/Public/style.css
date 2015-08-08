@@ -1,6 +1,172 @@
 #playscreen {
     width: 100%;
+    padding: 0px;
+
+
 }
+
+/*Big screens*/
+
+@media (min-width: 993px) { 
+    
+    div {
+        display: block
+    }
+    h1 {
+    
+       font-size: 40px;
+        margin: 0px!important;
+        padding-top: 225px!important;
+
+    }
+
+    #for {
+        font-size: 40px;
+        margin: 0px!important;
+        padding-top: 225px!important;
+        color: black;
+
+    }
+
+
+    #left {
+    
+    /*background-color: #2982C9;*/
+     background-color: #EB4924;
+    height: 525px;
+    text-align: center;
+    color: white;
+
+    }
+
+    #middle {
+    
+    background-color: white;
+    height: 525px;
+    text-align: center;
+    color: white;
+
+    }
+
+
+
+    #right {
+ 
+    background-color: #2982C9;
+    /*background-color: black;*/
+    height: 525px;
+    text-align: center;
+    color: white;
+   
+    }       
+
+
+    #voting {
+      background-color: black; 
+      height: 100px;
+      padding-bottom: 20px;
+      text-align: center;
+ 
+    }
+
+    #love {
+        padding: 20px;
+        margin-left: 20px;
+       
+    }
+
+    #hate {
+        padding: 20px;
+        margin-left: 400px;
+        
+    }
+
+    #results {
+    width: 100%;
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 32px;
+    margin-bottom: 20px;
+    display: table;
+    
+    
+    }
+
+    #topidea {
+
+    }
+
+   #topideascore {
+    text-align: right;
+
+   }
+
+
+
+    h2 {
+    text-align: center;
+    }
+
+    li {
+    list-style-type: none;
+    }
+
+
+/*Search form*/
+
+    #searchscreen{
+        width: 100%;
+        background-color: rgb(204, 33, 39);
+        color: white;
+        padding-bottom: 20px;
+     
+        /*max-height: 600px;*/
+
+    }
+
+
+    #submitscreen {
+
+        background-color: rgb(63, 114, 155);
+        width: 100%;
+        color: white;
+        padding-bottom: 20px;
+       padding-left: 350px;
+
+    }
+
+    #submitidea {
+        
+       display: table;
+       margin: 0 auto;
+
+
+
+    }
+
+    .form-control {
+
+        text-align: center;
+        max-width: 100%;
+
+
+    }
+
+    #socialbuttons {
+    width: 100%;
+    background-color: white;
+    margin: 15px   
+}
+    
+
+}
+
+
+
+
+
+
+/*Small screens */
 
 @media (max-width: 992px) { 
     
@@ -11,7 +177,7 @@
     
        font-size: 40px;
         margin: 0px!important;
-        padding: 50px!important;
+        padding-top: 85px!important;
 
     }
 
@@ -28,7 +194,7 @@
     
     /*background-color: #2982C9;*/
      background-color: #EB4924;
-    height: 250px;
+    height: 225px;
     text-align: center;
     color: white;
 
@@ -49,7 +215,7 @@
  
     background-color: #2982C9;
     /*background-color: black;*/
-    height: 250px;
+    height: 225px;
     text-align: center;
     color: white;
    
@@ -59,6 +225,7 @@
     #voting {
       background-color: black; 
       height: 100px;
+      padding-bottom: 20px;
  
     }
 
@@ -66,104 +233,72 @@
         padding: 20px;
     }
 
+    #results {
+    width: 100%;
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    display: table;
+    vertical-align: middle;
+
+    
+    }
+
    
-}
 
 
 
-
-
-
-
-h2 {
+    h2 {
     text-align: center;
-}
+    }
 
-li {
+    li {
     list-style-type: none;
-}
+    }
 
 
 /*Search form*/
 
-#searchscreen{
+    #searchscreen{
+        width: 100%;
+        background-color: rgb(204, 33, 39);
+        color: white;
+        padding-bottom: 20px;
+     
+        /*max-height: 600px;*/
+
+    }
+
+
+    #submitscreen {
+        background-color: rgb(63, 114, 155);
+        width: 100%;
+        color: white;
+        padding-bottom: 20px;
+    }
+
+    #submitidea {
+        width: 100%;
+       display: table;
+       margin: 0 auto
+
+
+    }
+
+    form-control {
+        text-align: center;
+
+    }
+
+    #socialbuttons {
     width: 100%;
-    background-color: rgb(204, 33, 39);
-    color: white;
-    /*max-height: 600px;*/
-
-}
-
-#submit-search{
-    text-align: left;
-}
-
-#autocomplete{
-    padding: 3px;
-    border: solid 1px #E4E4E4;
-    border-radius: 6px;
-    background-color: #fff;
-    
-    max-width: 100%;
-    display: table;
-   margin: 0 auto;
-   margin-top: 20px;
-    
-}
-
-/*.form-control{
-    
-    border: 0;
-    box-shadow: none;
-    margin-left: 15px;
-}
-*/
-#autocomplete-input button{
-    display: table;
-    margin: 0 auto;
-    background: none;
-    box-shadow: none;
-    border: 0;
-    color: #666666;
-    padding: 0 8px 0 10px;
-    border-left: solid 1px #ccc;
-}
-
-#search-input button:hover{
-    border: 0;
-    box-shadow: none;
-    border-left: solid 1px #ccc;
-}
-
-#search-input .glyphicon-search{
-    font-size: 23px;
-    margin-top: 20px;
-}
-
-#results {
-    margin-left: 20px;
-    margin-top: 20px;
-    font-size: 24px;
-    margin-bottom: 20px;
+    background-color: white;
+    margin: 15px   
 }
 
 
-#submitscreen {
-    background-color: rgb(63, 114, 155);
-    width: 100%;
-    color: white;
 }
-
-#submitidea {
-    
-   display: table;
-   margin: 0 auto
-
-
-}
-
-
-
 /*Buttons*/
 
 .btn{

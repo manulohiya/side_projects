@@ -9,6 +9,9 @@
 	<!-- Bootstrap CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
+    <!-- fonts -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
     <!-- Autocomplete CDN -->
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.css">
 
@@ -44,16 +47,18 @@
 
 <div class = "container-fluid" id = "playscreen">
 	
-	<div class ="row">
+
+
+	<!-- <div class ="row"> -->
   		<div id = "left" class="col-sm-5">
        		
        		<h1 id = "company"></h1>
        		
        	</div>
-    </div>
+    <!-- </div> -->
      
 
-     <div class ="row">
+     <!-- <div class ="row"> -->
        	<div id = "middle" class="col-sm-2">
       		
        		<h1 id = "for">for</h1>
@@ -61,15 +66,15 @@
 
     		
        		
-    	</div>
+    	<!-- </div> -->
     </div>
 
-    <div class ="row">
+    <!-- <div class ="row"> -->
        	<div id = "right" class="col-sm-5">
        <!-- <h1 id = "butfor"> for </h1> -->
        		<h1 id = "market"></h1>
     	</div>
-    </div>
+    <!-- </div> -->
 
 </div>
 
@@ -99,11 +104,11 @@
 <!-- Search form -->
 <div class = "container-fluid" id = "searchscreen">
 	
-<h2> Top Trending Ideas </h2>
+<h2> Top Trending </h2>
 	<div class="row">
         
     		
-	     <form class='form-group' id='submit-search'>
+	   <!--   <form class='form-group' id='submit-search'>
 	        <div class="col-sm-8">
 	            	<input id = "autocomplete" type="text" class="form-control input-lg" placeholder="Search for company or market segment" />
 	    	</div>        	
@@ -114,23 +119,37 @@
 	    	</div>
 	                
 	      </form>
-        </div>
+        </div> -->
 	
-	<div class = "row" id="results"></div>
+	<div id="results">
+		<div class = "container-fluid">
+       <div id = "topidea" class="col-xs-10">   
+         Recipe
+       </div 
+
+       <div id = "topideascore"class="col-xs-2">
+            Score     
+       </div>
+
+	</div>
+
+	</div>
 </div>
 
 
 
 <script type="text/template" id="resultsTemplate">
-	
-       <div>   
-          <li> <%= company %> for <%= market %>  <%= score %></li>
-         
-            
-            
-            
+<hr>
+	<div class = "container-fluid">
+       <div id = "topidea" class="col-xs-10">   
+         <%=counter%>. <%= company %> for <%= market %> 
+       </div 
+
+       <div id = "topideascore"class="col-xs-2">
+           <%= score %>      
        </div>
 
+	</div>
 
 
 </script>
@@ -141,20 +160,20 @@
 <div class="container-fluid" id = 'submitscreen'>
 
 <div class="col-sm-6">
-		<h2>Submit your idea!</h2> 
+		<h2>What's Your Idea?</h2> 
 		<div class="form-area">  
 			<form id = "new-idea" role="form">
 				<br style="clear:both">
 
 				<div class="form-group">
-					<input type="text" class="form-control" id="submitcompany" name="company" placeholder="X" required>
+					<input type="text" class="form-control" id="submitcompany" name="company" placeholder="e.g. Uber, Facebook, Google Docs, etc" required maxlength="30" >
 				</div>
-				<p> for
+				<p style="text-align: center"> for
 					<div class="form-group">
-						<input type="text" class="form-control" id="submitmarket" name="market" placeholder="Y" required>
+						<input type="text" class="form-control" id="submitmarket" name="market" placeholder="e.g. senior citizens, organic farming, etc." required maxlength="30">
 					</div>
 
-					<button type="button" id="submitidea" name="submitidea" class="btn btn-hot text-uppercase btn-lg">Submit Idea</button>
+					<button type="button" id="submitidea" name="submitidea" class="btn btn-fresh text-uppercase btn-lg">Submit Idea</button>
 				</form>
 			</div>
 
@@ -163,13 +182,12 @@
 	</div> 
 
 
-
-
-<!-- 
-	<div class="col-sm-6">
+	<div class="col-sm-6" id = "socialbuttons">
 	    <span class='st_facebook_large' displayText='Facebook'></span>
 		<span class='st_twitter_large' displayText='Tweet'></span>
-	</div>	 -->
+	</div>	
+
+
 
 
 

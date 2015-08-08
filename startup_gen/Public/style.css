@@ -2,82 +2,44 @@
     width: 100%;
 }
 
-
-
-@media (min-width: 992px) { 
-    h1 {
-    
-	   font-size: 80px;
-        margin-top: 200px!important;
-        }
-
-    #left {
-    
-    background-color: rgb(218, 85, 47);
-     /*background-color: black;*/
-    height: 600px;
-    text-align: center;
-    color: white;
-
-
-    }
-
-    #for {
-    
-    background-color: white;
-    /*height: 600px;*/
-    text-align: center;
-    
-    color: black;
-
-    display: table;
-    margin: 0 auto;
-    
-    }
-
-
-
-    #right {
- 
-    background-color: #2982C9;
-    /*background-color: black;*/
-    height: 600px;
-    text-align: center;
-    color: white;
-   
-    }    
-
-}
-
 @media (max-width: 992px) { 
+    
+    div {
+        display: block
+    }
     h1 {
     
        font-size: 40px;
-        margin-top: 0px!important;
-        padding: 0;
-    }
-
-    #left {
-    
-    background-color: rgb(218, 85, 47);
-     /*background-color: black;*/
-    height: 200px;
-    text-align: center;
-    color: white;
-
+        margin: 0px!important;
+        padding: 50px!important;
 
     }
 
     #for {
+        font-size: 40px;
+        margin: 0px!important;
+        padding: 0px!important;
+        color: black;
+
+    }
+
+
+    #left {
+    
+    /*background-color: #2982C9;*/
+     background-color: #EB4924;
+    height: 250px;
+    text-align: center;
+    color: white;
+
+    }
+
+    #middle {
     
     background-color: white;
     height: 50px;
     text-align: center;
-    
-    color: black;
-
-    display: table;
-    margin: 0 auto;
+    color: white;
 
     }
 
@@ -87,11 +49,22 @@
  
     background-color: #2982C9;
     /*background-color: black;*/
-    height: 200px;
+    height: 250px;
     text-align: center;
     color: white;
    
     }       
+
+
+    #voting {
+      background-color: black; 
+      height: 100px;
+ 
+    }
+
+    #hate, #love {
+        padding: 20px;
+    }
 
    
 }
@@ -195,7 +168,7 @@ li {
 
 .btn{
     
-    box-shadow: 1px 1px 5px #888888;
+    /*box-shadow: 1px 1px 5px #888888;*/
     text-align: center;
     margin-left: 0px;
 
@@ -235,7 +208,7 @@ background-color: #51bf87;
 border-bottom:2px solid #41996c;
 }
 
-.btn-fresh:hover, .btn-sky.active:focus, .btn-fresh:focus, .open>.dropdown-toggle.btn-fresh {
+.btn-fresh:hover, .btn-fresh.active:focus, .btn-fresh:focus, .open>.dropdown-toggle.btn-fresh {
 color: #fff;
 background-color: #66c796;
 border-bottom:2px solid #529f78;

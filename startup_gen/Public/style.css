@@ -1,3 +1,8 @@
+body {
+    /*font-family: 'Helvetica Neue', Helvetica, sans-serif;*/
+    font-family: 'Quattrocento Sans', sans-serif;
+}
+
 #playscreen {
     width: 100%;
     padding: 0px;
@@ -32,10 +37,11 @@
     #left {
     
     /*background-color: #2982C9;*/
-     background-color: #EB4924;
+     /*background-color: #EB4924;*/
     height: 525px;
     text-align: center;
     color: white;
+    font-family: 'Quattrocento Sans', sans-serif;
 
     }
 
@@ -52,11 +58,12 @@
 
     #right {
  
-    background-color: #2982C9;
+    /*background-color: #2982C9;*/
     /*background-color: black;*/
     height: 525px;
     text-align: center;
     color: white;
+    font-family: 'Josefin Sans', sans-serif;
    
     }       
 
@@ -85,7 +92,7 @@
     width: 100%;
     margin-left: 20px;
     margin-top: 20px;
-    font-size: 32px;
+    font-size: 16px;
     margin-bottom: 20px;
     display: table;
     
@@ -116,7 +123,7 @@
 
     #searchscreen{
         width: 100%;
-        background-color: rgb(204, 33, 39);
+        background-color: #C0392B;
         color: white;
         padding-bottom: 20px;
      
@@ -127,7 +134,7 @@
 
     #submitscreen {
 
-        background-color: rgb(63, 114, 155);
+        background-color: #2980B9;
         width: 100%;
         color: white;
         padding-bottom: 20px;
@@ -193,7 +200,7 @@
     #left {
     
     /*background-color: #2982C9;*/
-     background-color: #EB4924;
+     /*background-color: #EB4924;*/
     height: 225px;
     text-align: center;
     color: white;
@@ -213,11 +220,12 @@
 
     #right {
  
-    background-color: #2982C9;
+    /*background-color: #2982C9;*/
     /*background-color: black;*/
     height: 225px;
     text-align: center;
     color: white;
+    font-family: 'Quattrocento Sans', sans-serif;
    
     }       
 
@@ -262,7 +270,7 @@
 
     #searchscreen{
         width: 100%;
-        background-color: rgb(204, 33, 39);
+        background-color: #C0392B;
         color: white;
         padding-bottom: 20px;
      
@@ -272,7 +280,7 @@
 
 
     #submitscreen {
-        background-color: rgb(63, 114, 155);
+        background-color: #2980B9;
         width: 100%;
         color: white;
         padding-bottom: 20px;

@@ -17,8 +17,42 @@ window.addEventListener('DOMContentLoaded', function(event) {
   var idea_market = document.querySelector("#market");
   var ideas = {};
 
-  
+ 
+// Randomizer function
+var getRand = function(min,max) {
+ float_num = Math.random() * (max - min) + min;
+ rand = Math.floor(float_num);
+ return rand
+}
 
+// Fisher Yates randomizer
+function shuffle(array) {
+  var m = array.length, t, i;
+
+  // While there remain elements to shuffle…
+  while (m) {
+
+    // Pick a remaining element…
+    i = Math.floor(Math.random() * m--);
+
+    // And swap it with the current element.
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+
+  return array[getRand(0,array.length-1)];
+}
+
+//Random background color picker
+var background1 = ["#1abc9c", "#2ecc71", "#3498db","#9b59b6","#34495e", "#16a085","#27ae60","#2980b9","#8e44ad","#2c3e50", "#A0D468", "#8CC152", "#4FC1E9", "#3BAFDA", "#3BAFDA", "#5D9CEC", "#4A89DC", "#AC92EC", "#967ADC"];
+var background2 = ["#EC87C0", "#D770AD", "#f1c40f", "#e67e22", "#e74c3c", "#f39c12","#d35400", "#c0392b", "#ED5565","#DA4453", "#FC6E51", "#E9573F"];  
+
+randomColor1 = shuffle(background1);
+randomColor2 = shuffle(background2);
+
+console.log(randomColor1);
+console.log(randomColor2);
 
 
   $.get('/api/ideas/random', function(data){
@@ -35,7 +69,12 @@ window.addEventListener('DOMContentLoaded', function(event) {
     $('#love').attr('data-id', ideas._id);
     console.log("Changing data attribute")
     $('#hate').attr('data-id', ideas._id);
-    $("#market").fadeIn(timeout, function(){});  
+    $("#market").fadeIn(timeout, function(){}); 
+
+   
+     $("#left").css({'background-color': randomColor1}); 
+    $("#right").css({'background-color': randomColor2 }); 
+
 
   });
 

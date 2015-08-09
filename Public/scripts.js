@@ -74,6 +74,7 @@ console.log(randomColor2);
    
      $("#left").css({'background-color': randomColor1}); 
     $("#right").css({'background-color': randomColor2 }); 
+     $("#for").css('color', 'black'); 
 
 
   });

@@ -77,7 +77,7 @@ function shuffle(array) {
 
 // set up root route to respond with 'hello world'
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/public/views/index.html');
+  res.sendFile(__dirname + '/Public/index.html');
 });
 
 // generate all ideas and send to client
